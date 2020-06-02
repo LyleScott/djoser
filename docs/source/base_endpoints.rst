@@ -38,9 +38,9 @@ User Activate
 
 Use this endpoint to activate user account. This endpoint is not a URL which
 will be directly exposed to your users - you should provide site in your
-frontend application (configured by ``ACTIVATION_URL``) which will send ``POST``
-request to activate endpoint. ``HTTP_403_FORBIDDEN`` will be raised if user is already
-active when calling this endpoint (this will happen if you call it more than once).
+frontend application (configured by ``DOMAIN``, ``PROTOCOL``, and ``ACTIVATION_URL``) which will
+send a ``POST`` request to the activate endpoint. ``HTTP_403_FORBIDDEN`` will be raised if user is
+already active when calling this endpoint (this will happen if you call it more than once).
 
 **Default URL**: ``/users/activation/``
 
