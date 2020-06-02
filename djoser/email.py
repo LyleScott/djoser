@@ -15,15 +15,14 @@ class ActivationEmail(BaseEmailMessage):
         user = context.get("user")
         context["uid"] = utils.encode_uid(user.pk)
         context["token"] = default_token_generator.make_token(user)
+
+        # Use the [possibly] user supplied values to build links within emails.
+        keys = ("protocol", "domain")
+        for key in keys:
+            settings_value = getattr(settings, key.upper(), None)
+            if settings_value:
+                context[key] = settings_value
         context["url"] = settings.ACTIVATION_URL.format(**context)
-
-        domain = getattr(settings, "DOMAIN", None)
-        if domain:
-            context["domain"] = settings.DOMAIN
-
-        protocol = getattr(settings, "PROTOCOL", None)
-        if protocol:
-            context["protocol"] = settings.PROTOCOL
 
         return context
 
